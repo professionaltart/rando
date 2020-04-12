@@ -1,4 +1,6 @@
 @echo off
+
+REM Simple Windows batch file to dump service information to re-create using NSSM on a fresh machine/install/etc
 REM usage: dump servicename
 REM eg dump glances
 REM 
