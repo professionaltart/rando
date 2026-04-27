@@ -24,4 +24,4 @@ pacman -Syy less man-db man-pages sudo nano vim which
 sudo pacman -S --needed base-devel git
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && yay --version
 yay
-yay -S -N bat ripgrep fastfetch htop tmux neovim jq smartmontools iperf3 7zip unrar git python3 python3-pip cifs-utils sqlitebrowser thefuck -a ytree wget
+yay -S -N bat ripgrep fastfetch htop tmux neovim jq smartmontools iperf3 7zip unrar git python3 cifs-utils sqlitebrowser thefuck wget -a ytree 
