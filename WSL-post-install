@@ -30,7 +30,7 @@ sed -i '/^[[:space:]]*@includedir[[:space:]]\+\/etc\/sudoers\.d/ s/^/#/' /etc/su
 
 ## packages:
 su $USERNAME
-cd /home/$USERNAME && mkdir /home/$USERNAME/yay
+mkdir /home/$USERNAME/yay && cd /home/$USERNAME/yay
 sudo pacman -Syy less man-db man-pages sudo-rs nano vim which base-devel git
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && yay --version
 yay -S -N bat ripgrep fastfetch htop tmux neovim jq smartmontools iperf3 7zip unrar git python3 cifs-utils sqlitebrowser thefuck wget -a ytree 
