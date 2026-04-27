@@ -29,8 +29,12 @@ sed -i 's/^#\s*\(%sudo\s\+ALL=(ALL:ALL)\s\+ALL\)/\1/' /etc/sudoers.d/001-$USERNA
 sed -i '/^[[:space:]]*@includedir[[:space:]]\+\/etc\/sudoers\.d/ s/^/#/' /etc/sudoers.d/001-$USERNAME
 
 ## packages:
-su $USERNAME
-mkdir /home/$USERNAME/yay && cd /home/$USERNAME/yay
-sudo pacman -Syy less man-db man-pages sudo-rs nano vim which base-devel git
+pacman -Syy less man-db man-pages sudo-rs nano vim which base-devel git
+su -l $USERNAME
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && yay --version
 yay -S -N bat ripgrep fastfetch htop tmux neovim jq smartmontools iperf3 7zip unrar git python3 cifs-utils sqlitebrowser thefuck wget -a ytree 
+
+
+# add fastfetch to show at login (.bashrc)
+echo 'fastfetch' >> .bashrc
+. .bashrc
