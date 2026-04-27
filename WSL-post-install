@@ -26,9 +26,11 @@ locale-gen && localectl set-locale LANG=en_AU.UTF-8 && source /etc/profile.d/loc
 cp /etc/sudoers /etc/sudoers.d/001-$USERNAME
 sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL:ALL)\s\+ALL\)/\1/' /etc/sudoers.d/001-$USERNAME
 sed -i 's/^#\s*\(%sudo\s\+ALL=(ALL:ALL)\s\+ALL\)/\1/' /etc/sudoers.d/001-$USERNAME
+sed -i '/^[[:space:]]*@includedir[[:space:]]\+\/etc\/sudoers\.d/ s/^/#/' /etc/sudoers.d/001-$USERNAME
 
 ## packages:
-pacman -Syy less man-db man-pages sudo-rs nano vim which
-sudo pacman -S --needed base-devel git
+su $USERNAME
+cd /home/$USERNAME && mkdir /home/$USERNAME/yay
+sudo pacman -Syy less man-db man-pages sudo-rs nano vim which base-devel git
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && yay --version
 yay -S -N bat ripgrep fastfetch htop tmux neovim jq smartmontools iperf3 7zip unrar git python3 cifs-utils sqlitebrowser thefuck wget -a ytree 
