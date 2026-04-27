@@ -1,0 +1,27 @@
+# just post-WSL-install things
+
+# Ubuntu/Debian:
+sudo apt install bat ripgrep fastfetch htop tmux nano neovim jq smartmontools iperf3 ytree 7zip unrar git python3 python3-pip cifs-utils sqlitebrowser thefuck
+
+
+# Fedora/Rocky:
+sudo dnf install bat ripgrep fastfetch htop tmux nano neovim jq smartmontools iperf3 ytree 7zip unrar git python3 python3-pip cifs-utils sqlitebrowser thefuck
+
+
+# Arch/Cachy:
+## user:
+read -p "Enter username: " USERNAME
+groupadd sudo
+useradd -m -G wheel,sudo -s /bin/bash $USERNAME && passwd $USERNAME
+echo "[user]" >> /etc/wsl.conf
+echo "default="$USERNAME >> /etc/wsl.conf
+pacman -Syy less man-db man-pages sudo nano vim which
+
+## set/uncomment locale for eg man to work without erroring
+## allow/uncomment /etc/sudoers
+
+## packages:
+sudo pacman -S --needed base-devel git
+git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && yay --version
+yay
+yay -S -N bat ripgrep fastfetch htop tmux neovim jq smartmontools iperf3 7zip unrar git python3 python3-pip cifs-utils sqlitebrowser thefuck -a ytree wget
