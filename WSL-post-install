@@ -15,17 +15,20 @@ sudo dnf install bat ripgrep fastfetch htop tmux nano neovim jq smartmontools ip
 # Arch/Cachy:
 ## user:
 read -p "Enter username: " USERNAME
-groupadd sudo
-useradd -m -G wheel,sudo -s /bin/bash $USERNAME && passwd $USERNAME
+groupadd sudo && useradd -m -G wheel,sudo -s /bin/bash -u 1001 $USERNAME && passwd $USERNAME
 echo "[user]" >> /etc/wsl.conf
 echo "default="$USERNAME >> /etc/wsl.conf
-pacman -Syy less man-db man-pages sudo nano vim which
-
 ## set/uncomment locale for eg man to work without erroring
+sed -i 's/^# *\(en_AU\.UTF-8\)/\1/' /etc/locale.gen 
+locale-gen && localectl set-locale LANG=en_AU.UTF-8 && source /etc/profile.d/locale.sh
+
 ## allow/uncomment /etc/sudoers
+cp /etc/sudoers /etc/sudoers.d/001-$USERNAME
+sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL:ALL)\s\+ALL\)/\1/' /etc/sudoers.d/001-$USERNAME
+sed -i 's/^#\s*\(%sudo\s\+ALL=(ALL:ALL)\s\+ALL\)/\1/' /etc/sudoers.d/001-$USERNAME
 
 ## packages:
+pacman -Syy less man-db man-pages sudo-rs nano vim which
 sudo pacman -S --needed base-devel git
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && yay --version
-yay
 yay -S -N bat ripgrep fastfetch htop tmux neovim jq smartmontools iperf3 7zip unrar git python3 cifs-utils sqlitebrowser thefuck wget -a ytree 
