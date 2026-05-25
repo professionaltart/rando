@@ -3,7 +3,7 @@
 
 $source = "https://mick.nerdfirehurricane.com/localcv/localcv.zip"
 # download to where FakeVine can see it, or a temp location first
-$destination = "F:\data\comics\localcvdb"
+$destination = "P:\ath\to\fakevine\localcvdb"
 $date = Get-Date -Format "yyyyMMdd"
 
 curl $source -o $destination\localcvdb-$($date).zip
